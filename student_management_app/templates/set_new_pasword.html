@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %} 
+
+{% block content %}
+
+    <body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+
+    <img src="{% static 'admin/img/abc.png' %}" 
+    style="display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;">
+    <a href="{% url 'login' %}"><b>Student </b>Management System</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">You Resive 6 Digit OTP in your Register Email Address</p>
+
+      <form action="{% url 'set_new_password' %}" method="POST">
+      {% csrf_token %}
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" name="email" value="{{email}}" hidden>
+          <input type="text" class="form-control" placeholder="Enter OTP" name="OTP" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-comment"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" placeholder="New Password" name="new_password" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+
+         <div class="input-group mb-3">
+          <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+       
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </div>
+
+      
+
+
+          {% comment %} Display Messages {% endcomment %}
+          {% if messages %}
+          <div class="col-12">
+            {% for message in messages %}
+              {% if message.tags == "error" %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                  {{ message }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          <!-- /.col -->
+
+      </form>
+
+
+  </div>
+</div>
+<!-- /.login-box -->
+
+{% endblock %}

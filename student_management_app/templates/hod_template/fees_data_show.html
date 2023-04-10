@@ -1,0 +1,154 @@
+{% extends 'hod_template/base_template.html' %}
+
+{% block page_title %}
+    Fees Details
+{% endblock page_title %}
+
+{% block main_content %}
+
+{% load static %}
+
+
+<section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Fees Data</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form role="form" method="POST" action="{% url 'fees_data_fatch' %}">
+                        {% csrf_token %}
+
+
+                                {% comment %} Display Messages {% endcomment %}
+                                {% if messages %}
+                                <div class="form-group">
+                                <div class="col-12">
+                                    {% for message in messages %}
+                                    {% if message.tags == "error" %}
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% elif message.tags == "success" %}
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                                </div>
+                                {% endif %}
+
+
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Course Name </label>
+                              <select class="form-control" name="course" id="course">
+                                    {% for course in courses %}
+                                        <option value="{{ course.id }}" >{{ course.course_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Session Years </label>
+                                <select class="form-control" id="session_year" name="session_year" >
+                                    {% for session_year in session_years %}
+                                        <option value="{{ session_year.id }}">{{ session_year.session_start_year }} to {{ session_year.session_end_year }} </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+
+                        </div>
+                        <!-- /.card-body -->
+
+                        <div class="card-footer">
+                        <button type="submit" class="btn btn-primary" id="view_data">View Details</button>
+                        </div>
+                    </form>
+
+
+                    {% if fees_datas %}
+
+                   <div class="card-footer">
+                            <div class="form-group" id="attendance_block" >
+                                    <label>Fees Details </label>
+                                     <table class="table">
+                                    <thead class="thead-light">
+                                    <tr>
+                                        <th>#ID</th>
+                                        <th>Name</th>
+                                        <th>Course</th>
+                                        <th>Fees Amount</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+
+                                     {% for fees_data in fees_datas %}
+                                    <tr>
+                                        <td>{{ fees_data.id }}</td>
+                                        <td style="text-transform: uppercase;">{{ fees_data.admin.last_name }} {{ fees_data.admin.first_name }}</td>
+                                        <td>{{ fees_data.course_id.course_name }}</td>
+                                        <td>{{ fees_data.fees_amount}}</td>
+                                        {% if fees_data.fees_pay == 'Pending' %}
+                                        <td style="color:red">{{ fees_data.fees_pay}}</td>
+                                        {% else %}
+                                        <td style="color:green">{{ fees_data.fees_pay}}</td>
+                                        {% endif %}
+                                    </tr>
+                                    {% endfor %}
+                                </table>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- /.card -->
+
+
+
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+      </section>
+
+  {% endblock main_content %}
+
+
+{% block custom_js %}
+
+
+<!--<script>-->
+<!--    $(document).ready(function(){-->
+
+<!--          $("#view_data").click(function(){-->
+<!--                var course = $("#course").val()-->
+<!--                var session_year = $("#session_year").val()-->
+
+
+<!--                $.ajax({-->
+<!--                    url:'{% url 'fees_data_fatch' %}',-->
+<!--                    type:'POST',-->
+<!--                    data:{course:course, session_year:session_year},-->
+<!--                })-->
+
+
+<!--          })-->
+
+<!--    });-->
+<!--</script>-->
+
+{% endblock custom_js %}

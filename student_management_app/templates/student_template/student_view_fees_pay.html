@@ -1,0 +1,83 @@
+{% extends 'student_template/base_template.html' %}
+
+{% block page_title %}
+    Pay Fees
+{% endblock page_title %}
+
+{% block main_content %}
+
+{% load static %}
+
+
+<section class="content">
+        <div class="container-fluid">
+
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Result</h3>
+                        </div>
+
+                        <div class="card-body">
+                           <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="thead-light">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Course</th>
+                                        <th>Session Year</th>
+                                        <th>Fees</th>
+                                        <th>Status</th>
+                                         {% if student.fees_pay == 'Paid' %}
+                                        <th>Download Receipt</th>
+                                        {% endif %}
+                                    </tr>
+                                    </thead>
+
+                                    <tr>
+                                        <td style="text-transform: uppercase;">{{ user.last_name }} {{ user.first_name}}</td>
+                                        <td>{{ student.course_id.course_name }}</td>
+                                        <td>{{ student.session_year_id.session_start_year }} to {{ student.session_year_id.session_end_year }}</td>
+                                        <td>{{ student.fees_amount}}</td>
+                                      {% if student.fees_pay == 'Pending' %}
+                                        <td style="color:red">{{ student.fees_pay}}</td>
+                                        {% else %}
+                                        <td style="color:green">{{ student.fees_pay}}</td>
+                                        {% endif %}
+                                         {% if student.fees_pay == 'Paid' %}
+                                        <td><a href="{% url 'Invoice' %}">Download</a></td>
+                                        {% endif %}
+                                    </tr>
+
+                                </table>
+<!--                              <center><button type="submit" class="btn btn-primary" id="fetch_student">Pay Fees</button></center>-->
+                               <!-- Replace "test" with your own sandbox Business account app client ID -->
+                               {% if student.fees_pay == 'Pending' %}
+                               <center>
+                   <a href="{% url 'execute_payment' %}">
+                    <button class="paypal-button">
+                    <span class="paypal-button-text">Pay Fees</span>
+                    <span class="paypal-button-logo"></span>
+                    </button>
+                   </a>
+                    </center>
+                               {% endif %}
+                           </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+      </section>
+
+
+{% endblock main_content %}
+
+{% block custom_js %}
+
+{% endblock custom_js %}

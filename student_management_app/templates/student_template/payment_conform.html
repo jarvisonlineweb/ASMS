@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Payment Successful</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			background-color: #d5e5f5;
+			font-family: Arial, sans-serif;
+		}
+
+		.container {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+		}
+
+		.checkmark {
+			stroke-dasharray: 166;
+			stroke-dashoffset: 166;
+			animation: draw 0.6s ease-in-out forwards;
+			fill: none;
+			stroke-linecap: round;
+			stroke-linejoin: round;
+			stroke-width: 6;
+			stroke: #1abc9c;
+		}
+
+		@keyframes draw {
+			100% {
+				stroke-dashoffset: 0;
+			}
+		}
+
+		h1 {
+			font-size: 48px;
+			color: #1abc9c;
+			margin: 0;
+			padding: 0;
+			text-align: center;
+			line-height: 1.5;
+		}
+
+		p {
+			font-size: 18px;
+			color: #555;
+			margin: 0;
+			padding: 0;
+			text-align: center;
+			line-height: 1.5;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<svg width="200" height="200" viewBox="0 0 52 52">
+			<circle cx="26" cy="26" r="25" fill="none" stroke-width="2" />
+			<path class="checkmark" d="M14,27l11.5,11.5l21.5-21.5" />
+		</svg>
+		<div>
+			<h1>Payment Successful!</h1>
+			<p>Thank you for your payment. Your transaction has been completed successfully.</p>
+		</div>
+	</div>
+	<script>
+		setTimeout(function() {
+			window.location.href = "{% url 'student_view_fees_pay' %}";
+		}, 3500);
+	</script>
+</body>
+</html>
