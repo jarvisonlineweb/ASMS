@@ -19,7 +19,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'jarvisonlineweb@gmail.com'
+EMAIL_HOST_USER = 'demo@gmail.com'
 EMAIL_HOST_PASSWORD = 'skoimepzguahnumz'
 
 PAYPAL_CLIENT_ID = 'AcJQAT3_NrivqGxt_qjDksSUnCkhz7vY53QU5HRBMIn1oII0Ul7ze2QQU7_2WzkljaHTOE8y0R0YDgMZ'
