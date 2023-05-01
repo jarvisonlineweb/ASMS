@@ -22,8 +22,8 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'demo@gmail.com'
 EMAIL_HOST_PASSWORD = 'skoimepzguahnumz'
 
-PAYPAL_CLIENT_ID = 'AcJQAT3_NrivqGxt_qjDksSUnCkhz7vY53QU5HRBMIn1oII0Ul7ze2QQU7_2WzkljaHTOE8y0R0YDgMZ'
-PAYPAL_CLIENT_SECRET = 'EPeiHpjm6VDaJxmiSHEiyullyDwj0vd_6iu-lmW_tYzB1WTCuMa-DiOMbvarX3UO1khrMP2T-4L2wNOd'
+PAYPAL_CLIENT_ID = 'demo_id'
+PAYPAL_CLIENT_SECRET = 'demo_client_secret'
 
 # Application definition
 
